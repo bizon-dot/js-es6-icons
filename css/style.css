@@ -1,6 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Acme&family=Rubik:wght@300&display=swap');
+
 * {
 margin: 0;
 padding: 0;
 box-sizing: border-box;
 }
 
+body {
+    overflow-y: hidden;
+}
+
+/* Background gray */
+
+.bg-gray {
+    background-color: rgb(165, 161, 161);
+}
+
+/* Container */
+
+.container {        
+    width: 100%;
+    height: 100vh;
+
+}
+
+/* /Container */
+
+/* Header */
+
+.navbar {
+    display: flex;
+    padding:10px;
+    height: 70px;
+    line-height: 70px;
+    
+}
+
+.navbar > h1  {
+    font-family: 'Acme', sans-serif;
+    font-size: 2em;
+    color:#2cb2de;
+}
+
+/* Header */
+
+/* Container cards */
+
+.container-cards{
+    width: 100%;
+    height: calc(100% - 140px);
+    background-color: #dddddd;
+    display:flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap:wrap;
+
+}
+
+.container-cards > .card {
+    flex-basis: calc(100% / 5 - 20px);
+    min-width: 150px;
+    margin: 20px;
+    padding: 20px;
+    background-color: rgb(245,245,245);
+    border-radius: 10px;
+    text-align: center;
+}
+
+.footer{
+    width: 100%;
+    min-height: 70px;
+}
