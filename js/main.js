@@ -96,46 +96,18 @@ const icons = [{
     },
 ];
 
-const containerCards = document.getElementById("icons");
-
-const search = document.getElementById("types");
-search.innerHTML = ` `;
-const types = getTypes(icons);
-types.forEach((type) => {
-        search.innerHTML += `
-             <option value="${type}">${type}</option>    
-        `
-})
-console.log(search);
-
+//colori
 const colors = [
     `blue`,
     `orange`,
     `purple`
-]
+];
 
-containerCards.innerHTML = ` `;
+const containerCards = document.getElementById("icons");
+const search = document.getElementById("types");
 
-const coloredIcons = colorIcons(icons,colors);
-
-coloredIcons.forEach((icon) => {
-    const {
-        name,
-        prefix,
-        type,
-        family,
-        color
-    } = icon;
-    containerCards.innerHTML += `
-    <div class="card">
-        <i class = "${family} ${prefix + name}" style="color: ${color}"></i>
-        <div class="title">${name.toUpperCase()}</div>
-    </div>
-    `
-
-})
-
-function getTypes(array) {
+// Estrapolo i diversi tipi di icone in un array 
+const getTypes = array => {
     const types = [];
     array.forEach((element) => {
         if (!types.includes(element.type)) {
@@ -145,19 +117,63 @@ function getTypes(array) {
     return types;
 }
 
-function colorIcons(array,colors) {
+// Aggiungo i colori per ogni tipo
+const colorIcons = (array, colors) => {
     const types = getTypes(array);
     console.log(types);
-    const coloredIcons = array.map((element)=>{
+    const coloredIcons = array.map((element) => {
         const indexTypes = types.indexOf(element.type);
         element.color = colors[indexTypes];
-      
         return element;
-
     })
- return coloredIcons;
+    return coloredIcons;
 }
 
-// console.log(getTypes(icons));
+// Popolo il select 
+const searchSelect = () => {
+    search.innerHTML = ` `;
+    const types = getTypes(icons);
+    types.forEach((type) => {
+        search.innerHTML += `
+             <option value="${type}">${type.toUpperCase()}</option>    
+        `
+    });
+}
 
-// console.log(colorIcons(icons,colors));
+// 
+
+const generatePage = icons => {
+    containerCards.innerHTML = ` `;
+    const coloredIcons = colorIcons(icons, colors);
+    coloredIcons.forEach((icon) => {
+        const {
+            name,
+            prefix,
+            type,
+            family,
+            color
+        } = icon;
+        containerCards.innerHTML += `
+    <div class="card">
+        <i class = "${family} ${prefix + name}" style="color: ${color}"></i>
+        <div class="title">${name.toUpperCase()}</div>
+    </div>    `
+    });
+}
+
+
+
+
+
+searchSelect();
+generatePage(icons);
+
+search.addEventListener('change', function() {
+    let type = this.value;
+    for (const key in icons) {
+        if (Object.hasOwnProperty.call(object, key)) {
+            const element = object[key];
+            
+        }
+    }
+})
