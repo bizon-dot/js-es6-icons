@@ -16,6 +16,10 @@ body {
     background-color: rgb(165, 161, 161);
 }
 
+.bg-blue{
+    background-color: blue;
+}
+
 /* Container */
 
 .container {        
@@ -40,6 +44,17 @@ body {
     font-family: 'Acme', sans-serif;
     font-size: 2em;
     color:#2cb2de;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    line-height: 20px;
+}
+
+.search #types {
+    margin-left: 0.5em;
 }
 
 /* Header */
