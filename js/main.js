@@ -103,31 +103,11 @@ const colors = [
     `purple`
 ];
 
+// Div contenente tutte le card elle icone
 const containerCards = document.getElementById("icons");
+
+// Select dinamica
 const search = document.getElementById("types");
-
-// Estrapolo i diversi tipi di icone in un array 
-const getTypes = array => {
-    const types = [];
-    array.forEach((element) => {
-        if (!types.includes(element.type)) {
-            types.push(element.type);
-        }
-    })
-    return types;
-}
-
-// Aggiungo i colori per ogni tipo
-const colorIcons = (array, colors) => {
-    const types = getTypes(array);
-    console.log(types);
-    const coloredIcons = array.map((element) => {
-        const indexTypes = types.indexOf(element.type);
-        element.color = colors[indexTypes];
-        return element;
-    })
-    return coloredIcons;
-}
 
 // Popolo il select 
 const searchSelect = () => {
@@ -140,11 +120,46 @@ const searchSelect = () => {
     });
 }
 
+// Estrapolo i diversi tipi di icone in un array 
+const getTypes = array => {
+    const types = [];
+    array.forEach((element) => {
+        if (!types.includes(element.type)) {
+            types.push(element.type);
+        }
+    })
+    return types;
+}
+
+const filterArray = (array,type) => {
+    const newArray = [];
+    array.forEach((element) => {
+            if (element.type == type) {
+                newArray.push(element);
+            }
+    })
+    return newArray;
+}
+
+// Aggiungo i colori per ogni tipo
+const colorIcons = (array, colors) => {
+    const types = getTypes(array);
+    const coloredIcons = array.map((element) => {
+        const indexTypes = types.indexOf(element.type);
+        element.color = colors[indexTypes];
+        return element;
+    })
+    return coloredIcons;
+}
+
+
+
 // 
 
 const generatePage = icons => {
     containerCards.innerHTML = ` `;
     const coloredIcons = colorIcons(icons, colors);
+    console.log(coloredIcons);
     coloredIcons.forEach((icon) => {
         const {
             name,
@@ -161,19 +176,13 @@ const generatePage = icons => {
     });
 }
 
-
-
-
-
 searchSelect();
 generatePage(icons);
 
 search.addEventListener('change', function() {
     let type = this.value;
-    for (const key in icons) {
-        if (Object.hasOwnProperty.call(object, key)) {
-            const element = object[key];
-            
-        }
-    }
+    let newIcons = filterArray(icons, type);
+    let newColoredIcons = colorIcons(newIcons, colors);
+    console.log(newColoredIcons);
+    generatePage(newColoredIcons);
 })
