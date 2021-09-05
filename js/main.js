@@ -131,12 +131,12 @@ const getTypes = array => {
     return types;
 }
 
-const filterArray = (array,type) => {
+const filterArray = (array, type) => {
     const newArray = [];
     array.forEach((element) => {
-            if (element.type == type) {
-                newArray.push(element);
-            }
+        if (element.type == type) {
+            newArray.push(element);
+        }
     })
     return newArray;
 }
@@ -144,22 +144,29 @@ const filterArray = (array,type) => {
 // Aggiungo i colori per ogni tipo
 const colorIcons = (array, colors) => {
     const types = getTypes(array);
-    const coloredIcons = array.map((element) => {
-        const indexTypes = types.indexOf(element.type);
-        element.color = colors[indexTypes];
-        return element;
-    })
-    return coloredIcons;
+    let count = Object.keys(types).length;
+    if (count > 1) {
+        const coloredIcons = array.map((element) => {
+            const indexTypes = types.indexOf(element.type);
+            element.color = colors[indexTypes];
+            return element;
+        })
+        return coloredIcons;
+    } else {
+        const indexTypes = Math.floor(Math.random() * 3);
+        const coloredIcons = array.map((element) => {
+            element.color = colors[indexTypes];
+            return element;
+        })
+        return coloredIcons;
+    }
+   
+   
 }
-
-
-
-// 
 
 const generatePage = icons => {
     containerCards.innerHTML = ` `;
     const coloredIcons = colorIcons(icons, colors);
-    console.log(coloredIcons);
     coloredIcons.forEach((icon) => {
         const {
             name,
@@ -168,6 +175,7 @@ const generatePage = icons => {
             family,
             color
         } = icon;
+        
         containerCards.innerHTML += `
     <div class="card">
         <i class = "${family} ${prefix + name}" style="color: ${color}"></i>
@@ -179,10 +187,12 @@ const generatePage = icons => {
 searchSelect();
 generatePage(icons);
 
-search.addEventListener('change', function() {
+search.addEventListener('change', function () {
     let type = this.value;
     let newIcons = filterArray(icons, type);
     let newColoredIcons = colorIcons(newIcons, colors);
     console.log(newColoredIcons);
     generatePage(newColoredIcons);
 })
+
+
